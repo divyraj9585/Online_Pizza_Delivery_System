@@ -1,0 +1,185 @@
+# Online Pizza Delivery System - Documentation
+
+## Overview
+The Online Pizza Delivery System is a comprehensive web application built using PHP, MySQL, HTML, CSS, and JavaScript. It enables customers to order pizzas online, track their orders, and provides separate interfaces for administrators and delivery personnel to manage the business operations.
+
+## System Architecture
+
+### Technology Stack
+- **Backend**: PHP
+- **Database**: MySQL
+- **Frontend**: HTML, CSS, JavaScript, Bootstrap
+- **Payment Gateway**: Razorpay
+- **Server**: Apache (XAMPP)
+
+### Database Structure
+The system uses a MySQL database named 'OPD' with the following key tables:
+
+1. **users** - Stores customer information
+2. **admin** - Stores admin credentials
+3. **delivery_boys** - Stores delivery personnel information
+4. **categories** - Stores food categories (Veg Items, Non-Veg Items, Beverages)
+5. **item** - Stores menu items with prices and descriptions
+6. **viewcart** - Stores items in user's shopping cart
+7. **orders** - Stores order information
+8. **orderitems** - Stores items associated with each order
+9. **reviews** - Stores customer reviews for orders
+10. **feedback** - Stores customer feedback
+11. **contact** - Stores customer support requests
+12. **sitedetail** - Stores site configuration details
+
+## System Components
+
+### 1. Customer Interface
+The customer interface allows users to browse the menu, add items to cart, place orders, and manage their accounts.
+
+**Key Features:**
+- User registration and login
+- Menu browsing by categories
+- Shopping cart functionality
+- Order placement with multiple payment options
+- Order tracking
+- Review and feedback submission
+- Profile management
+- Favorite items functionality
+
+**Key Files:**
+- `index.php` - Main landing page
+- `partials/_nav.php` - Navigation bar
+- `partials/_checkoutModal.php` - Checkout process
+- `viewOrder.php` - Order history and tracking
+- `partials/_manageCart.php` - Cart management
+
+### 2. Admin Interface
+The admin panel provides comprehensive management tools for the pizza delivery business.
+
+**Key Features:**
+- Order management (view, update status, assign delivery personnel)
+- Menu management (add, edit, delete items)
+- Category management
+- User management
+- Delivery boy management
+- Feedback and complaint management
+- Site configuration
+- Contact inquiries management
+
+**Key Files:**
+- `admin/index.php` - Admin dashboard
+- `admin/orderManage.php` - Order management
+- `admin/menuManage.php` - Menu management
+- `admin/categoryManage.php` - Category management
+- `admin/userManage.php` - User management
+- `admin/deliveryRequests.php` - Delivery boy requests
+
+### 3. Delivery Personnel Interface
+The delivery boy panel allows delivery personnel to manage their assigned orders.
+
+**Key Features:**
+- Order assignment and tracking
+- Order status updates
+- Delivery confirmation
+- Payout information
+- Profile management
+
+**Key Files:**
+- `deliveryboy/index.php` - Delivery boy dashboard
+- `deliveryboy/orderDetails.php` - Order details
+- `deliveryboy/deliveryDetails.php` - Delivery tracking
+
+## Order Flow Process
+
+### 1. Customer Order Process
+1. **Browse Menu**: Customer browses through categories and menu items
+2. **Add to Cart**: Customer adds desired items to cart with quantities and sizes
+3. **Checkout**: Customer fills in delivery details and chooses payment method
+4. **Payment**: For online orders, customer is redirected to Razorpay gateway
+5. **Order Confirmation**: Order is created with status 'Order Placed' (status 0)
+
+### 2. Order Status Progression
+- **Status 0**: Order Placed
+- **Status 1**: Order Confirmed
+- **Status 2**: Preparing your Order
+- **Status 3**: Your order is on the way!
+- **Status 4**: Order Delivered
+- **Status 5**: Order Denied
+- **Status 6**: Order Cancelled
+
+### 3. Payment Processing
+The system supports two payment methods:
+- **Cash on Delivery (COD)**: Payment mode '0'
+- **Online Payment**: Payment mode '1' using Razorpay
+
+For online payments:
+1. Customer completes order details
+2. System calculates final amount (item cost + GST + shipping)
+3. Customer redirected to Razorpay gateway
+4. Payment confirmation updates order status to 'Order Confirmed' (status 1)
+
+### 4. Delivery Assignment
+- Admin assigns delivery personnel to orders
+- Delivery boy receives notification of assigned orders
+- Delivery boy updates order status as they progress
+- Final delivery time is recorded
+
+## Security Features
+- Password hashing using PHP's password_hash() function
+- SQL injection prevention using prepared statements
+- Session management for user authentication
+- Input validation and sanitization
+
+## Key Functionalities
+
+### User Management
+- Registration with email verification
+- Login/logout functionality
+- Password recovery
+- Profile management
+- Order history tracking
+
+### Cart Management
+- Add/remove items from cart
+- Update quantities
+- Size selection (S, M, L) with price variations
+- Real-time cart updates
+
+### Menu Management
+- Categorized menu display
+- Item details with images and descriptions
+- Price variations based on size
+- Availability status management
+
+### Order Management
+- Complete order tracking system
+- Status updates with visual progress indicators
+- Delivery time estimation
+- Order cancellation capability
+- Review submission after delivery
+
+## File Structure
+```
+OnlinePizzaDelivery/
+├── admin/ (Admin panel)
+├── deliveryboy/ (Delivery personnel panel)
+├── partials/ (Reusable components)
+├── assets/ (CSS, JS files)
+├── pigga/ (Frontend assets)
+├── database/ (SQL dump files)
+├── img/ (Image files)
+└── various PHP files for functionality
+```
+
+## Payment Integration
+The system integrates with Razorpay for online payments:
+- API key configured in payment.php
+- Secure payment processing
+- Automatic order status updates upon payment completion
+- Payment ID tracking for reconciliation
+
+## Review and Feedback System
+- Post-delivery review submission
+- Rating system (1-5 stars)
+- Customer complaint handling
+- Feedback management interface for admin
+
+## Conclusion
+The Online Pizza Delivery System is a complete e-commerce solution with separate interfaces for customers, administrators, and delivery personnel. It provides a seamless ordering experience with comprehensive management tools for business operations. The system is built with security in mind and includes features like payment integration, order tracking, and customer feedback management.
